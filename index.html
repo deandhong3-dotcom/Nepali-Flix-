@@ -1,697 +1,574 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>WorldFlix 🌎</title>
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#080808;
-    color:white;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#090909;
+  color:white;
 }
 
-/* HEADER */
-
 header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background:#111;
-    padding:15px 5%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    border-bottom:1px solid #292929;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#111;
+  padding:15px 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  border-bottom:1px solid #292929;
 }
 
 .logo{
-    font-size:28px;
-    font-weight:bold;
-    color:#e50914;
-}
-
-.logo span{
-    color:white;
+  font-size:27px;
+  font-weight:bold;
+  color:#e50914;
+  white-space:nowrap;
 }
 
 .search{
-    width:280px;
-    padding:11px 18px;
-    border:0;
-    outline:0;
-    border-radius:25px;
-    background:#292929;
-    color:white;
+  width:100%;
+  max-width:430px;
+  padding:12px 18px;
+  border:none;
+  outline:none;
+  border-radius:25px;
+  background:#242424;
+  color:white;
+  font-size:15px;
 }
 
-/* HERO */
-
 .hero{
-    min-height:380px;
-    padding:90px 6%;
-    display:flex;
-    align-items:center;
-    background:
-    linear-gradient(90deg,#080808 15%,rgba(8,8,8,.75),rgba(8,8,8,.2)),
-    linear-gradient(0deg,#080808,transparent),
-    radial-gradient(circle at 70% 40%,#6b0b12,#151515 45%,#080808);
+  min-height:360px;
+  padding:70px 7%;
+  display:flex;
+  align-items:center;
+  background:
+    linear-gradient(90deg,#000 15%,rgba(0,0,0,.65),rgba(0,0,0,.1)),
+    url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80")
+    center/cover;
 }
 
 .hero-content{
-    max-width:650px;
+  max-width:650px;
 }
 
 .hero h1{
-    font-size:52px;
-    margin-bottom:18px;
-}
-
-.hero h1 span{
-    color:#e50914;
+  font-size:48px;
+  margin-bottom:15px;
 }
 
 .hero p{
-    color:#ccc;
-    line-height:1.7;
-    font-size:17px;
+  color:#ddd;
+  font-size:17px;
+  line-height:1.6;
+  margin-bottom:20px;
 }
 
 .hero-btn{
-    display:inline-block;
-    margin-top:25px;
-    background:#e50914;
-    color:white;
-    padding:13px 25px;
-    border-radius:5px;
-    text-decoration:none;
-    font-weight:bold;
+  display:inline-block;
+  background:#e50914;
+  color:white;
+  padding:12px 22px;
+  border-radius:7px;
+  text-decoration:none;
+  font-weight:bold;
 }
 
-/* CONTENT */
-
-.container{
-    padding:35px 5%;
+.controls{
+  padding:25px 5% 10px;
 }
 
 .section-title{
-    font-size:26px;
-    margin-bottom:20px;
+  padding:20px 5% 5px;
+  font-size:26px;
 }
 
-/* COUNTRY BUTTONS */
-
-.countries{
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    padding-bottom:15px;
+.filters{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:12px 0;
 }
 
-.country{
-    flex-shrink:0;
-    border:0;
-    padding:10px 18px;
-    border-radius:25px;
-    background:#242424;
-    color:white;
-    cursor:pointer;
+.filters button{
+  background:#222;
+  color:white;
+  border:1px solid #444;
+  padding:9px 16px;
+  border-radius:20px;
+  cursor:pointer;
+  white-space:nowrap;
 }
 
-.country:hover{
-    background:#e50914;
+.filters button:hover,
+.filters button.active{
+  background:#e50914;
+  border-color:#e50914;
 }
 
-/* MOVIES */
+.tabs{
+  display:flex;
+  gap:10px;
+  padding:10px 5%;
+}
+
+.tabs button{
+  background:#222;
+  color:white;
+  border:0;
+  padding:10px 18px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.tabs button.active{
+  background:#e50914;
+}
 
 .movies{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-    gap:22px;
+  padding:20px 5%;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:22px;
 }
 
-.movie{
-    background:#151515;
-    border-radius:9px;
-    overflow:hidden;
-    transition:.3s;
+.card{
+  background:#171717;
+  border-radius:10px;
+  overflow:hidden;
+  transition:.25s;
+  position:relative;
+  box-shadow:0 4px 15px rgba(0,0,0,.3);
 }
 
-.movie:hover{
-    transform:translateY(-7px);
-    box-shadow:0 10px 30px rgba(0,0,0,.6);
+.card:hover{
+  transform:translateY(-6px);
 }
-
-/* POSTER */
 
 .poster{
-    height:270px;
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
+  width:100%;
+  height:270px;
+  object-fit:cover;
+  display:block;
+  background:#222;
 }
 
-.poster-bg{
-    position:absolute;
-    inset:0;
-    background:
-    linear-gradient(145deg,#74131b,#171717 55%,#050505);
+.card-content{
+  padding:12px;
 }
 
-.poster-bg.two{
-    background:
-    linear-gradient(145deg,#092e45,#111 55%,#050505);
+.card h3{
+  font-size:17px;
+  margin-bottom:7px;
 }
 
-.poster-bg.three{
-    background:
-    linear-gradient(145deg,#503008,#161616 55%,#050505);
-}
-
-.poster-bg.four{
-    background:
-    linear-gradient(145deg,#321052,#111 55%,#050505);
-}
-
-.poster-bg.five{
-    background:
-    linear-gradient(145deg,#124a38,#111 55%,#050505);
-}
-
-.poster-content{
-    position:relative;
-    text-align:center;
-    padding:15px;
-}
-
-.poster-content .globe{
-    font-size:55px;
-    margin-bottom:15px;
-}
-
-.poster-content h3{
-    font-size:22px;
-    letter-spacing:1px;
-}
-
-.poster-content small{
-    display:block;
-    color:#ddd;
-    margin-top:8px;
-}
-
-/* MOVIE INFO */
-
-.movie-info{
-    padding:14px;
-}
-
-.movie-info h3{
-    margin-bottom:7px;
-}
-
-.movie-info p{
-    color:#999;
-    font-size:13px;
+.meta{
+  color:#aaa;
+  font-size:13px;
+  margin-bottom:6px;
 }
 
 .rating{
-    color:#ffc107;
-    margin-top:8px;
+  color:#ffd700;
+  font-size:14px;
+  margin-bottom:8px;
 }
 
-.watch{
-    display:block;
-    text-align:center;
-    background:#e50914;
-    color:white;
-    text-decoration:none;
-    padding:9px;
-    margin-top:12px;
-    border-radius:4px;
+.stars{
+  color:#ffd700;
 }
 
-/* FOOTER */
+.actions{
+  display:flex;
+  gap:7px;
+  margin-top:10px;
+}
+
+.actions button,
+.actions a{
+  flex:1;
+  text-align:center;
+  padding:8px 5px;
+  border:none;
+  border-radius:5px;
+  font-size:12px;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+.trailer{
+  background:#e50914;
+  color:white;
+}
+
+.details{
+  background:#333;
+  color:white;
+}
+
+.favorite{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:none;
+  background:rgba(0,0,0,.7);
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.favorite.active{
+  color:#e50914;
+}
+
+#noResults{
+  display:none;
+  text-align:center;
+  padding:60px 20px;
+  color:#aaa;
+  font-size:20px;
+}
 
 footer{
-    margin-top:40px;
-    padding:30px;
-    text-align:center;
-    background:#111;
-    color:#777;
+  margin-top:50px;
+  padding:30px;
+  text-align:center;
+  color:#888;
+  border-top:1px solid #222;
+}
+
+/* MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  z-index:2000;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  padding:25px;
+  overflow:auto;
+}
+
+.modal-box{
+  max-width:800px;
+  margin:40px auto;
+  background:#181818;
+  border-radius:12px;
+  overflow:hidden;
+  position:relative;
+}
+
+.modal-close{
+  position:absolute;
+  right:15px;
+  top:12px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  border:none;
+  background:#e50914;
+  color:white;
+  font-size:22px;
+  cursor:pointer;
+  z-index:5;
+}
+
+.modal-content{
+  display:grid;
+  grid-template-columns:280px 1fr;
+}
+
+.modal-poster{
+  width:100%;
+  height:100%;
+  min-height:400px;
+  object-fit:cover;
+}
+
+.modal-info{
+  padding:30px;
+}
+
+.modal-info h2{
+  font-size:30px;
+  margin-bottom:12px;
+}
+
+.modal-info p{
+  color:#ccc;
+  line-height:1.7;
+  margin:15px 0;
+}
+
+.modal-btn{
+  display:inline-block;
+  padding:11px 18px;
+  border-radius:6px;
+  text-decoration:none;
+  background:#e50914;
+  color:white;
+  margin-top:10px;
 }
 
 /* MOBILE */
 
-@media(max-width:650px){
+@media(max-width:700px){
 
-    header{
-        flex-direction:column;
-    }
+  header{
+    flex-direction:column;
+    align-items:stretch;
+  }
 
-    .search{
-        width:100%;
-    }
+  .logo{
+    text-align:center;
+  }
 
-    .hero{
-        min-height:330px;
-        padding:60px 6%;
-    }
+  .hero{
+    min-height:330px;
+    padding:45px 6%;
+  }
 
-    .hero h1{
-        font-size:37px;
-    }
+  .hero h1{
+    font-size:34px;
+  }
 
-    .movies{
-        grid-template-columns:repeat(2,1fr);
-        gap:14px;
-    }
+  .hero p{
+    font-size:15px;
+  }
 
-    .poster{
-        height:230px;
-    }
+  .movies{
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    padding:15px 3%;
+  }
 
-    .container{
-        padding:28px 4%;
-    }
+  .poster{
+    height:230px;
+  }
+
+  .card-content{
+    padding:9px;
+  }
+
+  .card h3{
+    font-size:14px;
+  }
+
+  .modal{
+    padding:10px;
+  }
+
+  .modal-box{
+    margin:20px auto;
+  }
+
+  .modal-content{
+    grid-template-columns:1fr;
+  }
+
+  .modal-poster{
+    height:350px;
+    min-height:0;
+  }
+
+  .modal-info{
+    padding:20px;
+  }
+
+  .modal-info h2{
+    font-size:24px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-
 <header>
-
-<div class="logo">
-World<span>Flix</span> 🌎
-</div>
-
-<input
-class="search"
-id="search"
-type="text"
-placeholder="🔍 Search movies..."
-onkeyup="searchMovies()">
-
+  <div class="logo">WorldFlix 🌎</div>
+  <input
+    type="text"
+    id="search"
+    class="search"
+    placeholder="🔎 Search movies, country, genre..."
+  >
 </header>
 
-
-<!-- HERO -->
-
 <section class="hero">
-
-<div class="hero-content">
-
-<h1>
-Movies From <span>Everywhere</span> 🌎
-</h1>
-
-<p>
-Explore movies from Nepal, India, Korea, Japan,
-USA and countries around the world — all in one place.
-</p>
-
-<a href="#movies" class="hero-btn">
-🎬 Explore Movies
-</a>
-
-</div>
-
+  <div class="hero-content">
+    <h1>Movies From Around The World 🌎</h1>
+    <p>
+      Explore movies from Nepal, India, Korea, Japan, USA, UK, France,
+      Italy, Spain, China, Thailand, Turkey and many more countries.
+    </p>
+    <a href="#moviesSection" class="hero-btn">🎬 Explore Movies</a>
+  </div>
 </section>
 
+<div class="controls">
 
-<!-- MAIN -->
+  <h3>🌎 Countries</h3>
+  <div class="filters" id="countryFilters"></div>
 
-<div class="container">
+  <h3 style="margin-top:15px;">🎭 Genres</h3>
+  <div class="filters" id="genreFilters"></div>
 
-<h2 class="section-title">
-🌎 Browse By Country
+</div>
+
+<div class="tabs">
+  <button id="popularBtn" class="active" onclick="setTab('popular')">
+    🔥 Popular
+  </button>
+
+  <button id="latestBtn" onclick="setTab('latest')">
+    🆕 Latest
+  </button>
+
+  <button id="favoriteBtn" onclick="setTab('favorites')">
+    ❤️ Favorites
+  </button>
+</div>
+
+<h2 class="section-title" id="moviesSection">
+  🎬 Movies
 </h2>
 
-<div class="countries">
+<div class="movies" id="movies"></div>
 
-<button class="country" onclick="filterMovies('All')">
-🌎 All
-</button>
-
-<button class="country" onclick="filterMovies('Nepal')">
-🇳🇵 Nepal
-</button>
-
-<button class="country" onclick="filterMovies('India')">
-🇮🇳 India
-</button>
-
-<button class="country" onclick="filterMovies('Korea')">
-🇰🇷 Korea
-</button>
-
-<button class="country" onclick="filterMovies('Japan')">
-🇯🇵 Japan
-</button>
-
-<button class="country" onclick="filterMovies('USA')">
-🇺🇸 USA
-</button>
-
-<button class="country" onclick="filterMovies('Europe')">
-🇪🇺 Europe
-</button>
-
+<div id="noResults">
+  😢 No movies found.
 </div>
-
-
-<h2 class="section-title" style="margin-top:25px;">
-🔥 Popular Movies
-</h2>
-
-
-<div class="movies" id="movies">
-
-
-<!-- MOVIE 1 -->
-
-<div class="movie" data-country="Nepal">
-
-<div class="poster">
-
-<div class="poster-bg"></div>
-
-<div class="poster-content">
-
-<div class="globe">🏔️</div>
-
-<h3>HIMALAYAN</h3>
-
-<small>ADVENTURE</small>
-
-</div>
-
-</div>
-
-<div class="movie-info">
-
-<h3>Himalayan Adventure</h3>
-
-<p>🇳🇵 Nepal • Adventure</p>
-
-<div class="rating">
-⭐ 8.5/10
-</div>
-
-<a class="watch" href="#">
-▶ Watch Trailer
-</a>
-
-</div>
-
-</div>
-
-
-<!-- MOVIE 2 -->
-
-<div class="movie" data-country="India">
-
-<div class="poster">
-
-<div class="poster-bg two"></div>
-
-<div class="poster-content">
-
-<div class="globe">🇮🇳</div>
-
-<h3>INDIA</h3>
-
-<small>CINEMA</small>
-
-</div>
-
-</div>
-
-<div class="movie-info">
-
-<h3>Indian Cinema</h3>
-
-<p>🇮🇳 India • Action</p>
-
-<div class="rating">
-⭐ 8.2/10
-</div>
-
-<a class="watch" href="#">
-▶ Watch Trailer
-</a>
-
-</div>
-
-</div>
-
-
-<!-- MOVIE 3 -->
-
-<div class="movie" data-country="Korea">
-
-<div class="poster">
-
-<div class="poster-bg three"></div>
-
-<div class="poster-content">
-
-<div class="globe">🇰🇷</div>
-
-<h3>KOREA</h3>
-
-<small>DRAMA</small>
-
-</div>
-
-</div>
-
-<div class="movie-info">
-
-<h3>Korean Story</h3>
-
-<p>🇰🇷 Korea • Drama</p>
-
-<div class="rating">
-⭐ 8.7/10
-</div>
-
-<a class="watch" href="#">
-▶ Watch Trailer
-</a>
-
-</div>
-
-</div>
-
-
-<!-- MOVIE 4 -->
-
-<div class="movie" data-country="Japan">
-
-<div class="poster">
-
-<div class="poster-bg four"></div>
-
-<div class="poster-content">
-
-<div class="globe">🇯🇵</div>
-
-<h3>JAPAN</h3>
-
-<small>ADVENTURE</small>
-
-</div>
-
-</div>
-
-<div class="movie-info">
-
-<h3>Japan Adventure</h3>
-
-<p>🇯🇵 Japan • Adventure</p>
-
-<div class="rating">
-⭐ 8.4/10
-</div>
-
-<a class="watch" href="#">
-▶ Watch Trailer
-</a>
-
-</div>
-
-</div>
-
-
-<!-- MOVIE 5 -->
-
-<div class="movie" data-country="USA">
-
-<div class="poster">
-
-<div class="poster-bg five"></div>
-
-<div class="poster-content">
-
-<div class="globe">🇺🇸</div>
-
-<h3>HOLLYWOOD</h3>
-
-<small>ACTION</small>
-
-</div>
-
-</div>
-
-<div class="movie-info">
-
-<h3>American Action</h3>
-
-<p>🇺🇸 USA • Action</p>
-
-<div class="rating">
-⭐ 8.6/10
-</div>
-
-<a class="watch" href="#">
-▶ Watch Trailer
-</a>
-
-</div>
-
-</div>
-
-
-<!-- MOVIE 6 -->
-
-<div class="movie" data-country="Europe">
-
-<div class="poster">
-
-<div class="poster-bg two"></div>
-
-<div class="poster-content">
-
-<div class="globe">🇪🇺</div>
-
-<h3>EUROPE</h3>
-
-<small>THRILLER</small>
-
-</div>
-
-</div>
-
-<div class="movie-info">
-
-<h3>European Thriller</h3>
-
-<p>🇪🇺 Europe • Thriller</p>
-
-<div class="rating">
-⭐ 8.3/10
-</div>
-
-<a class="watch" href="#">
-▶ Watch Trailer
-</a>
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
 
 <footer>
-
-<p>
-© 2026 WorldFlix 🌎
-</p>
-
-<p style="margin-top:8px;">
-Movies From Around The World
-</p>
-
+  <p>© 2026 WorldFlix 🌎</p>
+  <p style="margin-top:8px;">
+    Discover movies from around the world.
+  </p>
 </footer>
 
+<!-- DETAILS MODAL -->
+
+<div class="modal" id="movieModal">
+
+  <div class="modal-box">
+
+    <button class="modal-close" onclick="closeModal()">×</button>
+
+    <div class="modal-content">
+
+      <img id="modalPoster" class="modal-poster">
+
+      <div class="modal-info">
+
+        <h2 id="modalTitle"></h2>
+
+        <div id="modalMeta"></div>
+
+        <div id="modalRating"></div>
+
+        <p id="modalDescription"></p>
+
+        <a
+          id="modalTrailer"
+          class="modal-btn"
+          target="_blank"
+        >
+          ▶️ Watch Trailer
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
 <script>
 
-function filterMovies(country){
+/* =========================
+   MOVIE DATA
+========================= */
 
-const movies =
-document.querySelectorAll(".movie");
+const movies = [
 
-movies.forEach(movie => {
+{
+ title:"Himalayan Adventure",
+ country:"Nepal",
+ flag:"🇳🇵",
+ genre:"Adventure",
+ year:2026,
+ rating:8.2,
+ image:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80",
+ description:"A thrilling adventure through the mountains and beautiful landscapes of Nepal."
+},
 
-if(
-country === "All" ||
-movie.dataset.country === country
-){
+{
+ title:"Kathmandu Story",
+ country:"Nepal",
+ flag:"🇳🇵",
+ genre:"Drama",
+ year:2025,
+ rating:7.8,
+ image:"https://images.unsplash.com/photo-1558799401-1dc0f3a8f2d0?auto=format&fit=crop&w=600&q=80",
+ description:"A dramatic story inspired by life, friendship and dreams in Kathmandu."
+},
 
-movie.style.display="block";
+{
+ title:"Mountain Love",
+ country:"Nepal",
+ flag:"🇳🇵",
+ genre:"Romance",
+ year:2025,
+ rating:8.0,
+ image:"https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=600&q=80",
+ description:"A romantic journey through the peaceful mountains."
+},
 
-}else{
+{
+ title:"The Last Village",
+ country:"Nepal",
+ flag:"🇳🇵",
+ genre:"Drama",
+ year:2024,
+ rating:7.7,
+ image:"https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=600&q=80",
+ description:"A story about people protecting their village and their traditions."
+},
 
-movie.style.display="none";
+{
+ title:"Indian Action",
+ country:"India",
+ flag:"🇮🇳",
+ genre:"Action",
+ year:2026,
+ rating:8.4,
+ image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80",
+ description:"An action-packed story filled with danger and unexpected twists."
+},
 
-}
-
-});
-
-}
-
-
-function searchMovies(){
-
-const search =
-document.getElementById("search")
-.value
-.toLowerCase();
-
-const movies =
-document.querySelectorAll(".movie");
-
-movies.forEach(movie => {
-
-const text =
-movie.innerText.toLowerCase();
-
-if(text.includes(search)){
-
-movie.style.display="block";
-
-}else{
-
-movie.style.display="none";
-
-}
-
-});
-
-}
-
-</script>
-
-</body>
-</html>
+{
+ title:"Mumbai Dreams",
+ country:"India",
+ flag:"🇮🇳",
+ genre:"Drama",
+ year:2025,
+ rating:8.1,
+ image:"https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?auto=format&fit=crop&w=600&q=80",
+ description:"A young dreamer tries to build a new
